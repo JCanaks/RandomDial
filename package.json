@@ -1,0 +1,39 @@
+{
+  "name": "randomdial",
+  "version": "1.0.0",
+  "description": "Random phone number generator",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node server/index.js --exec babel-node",
+    "dev-start": "nodemon --exec babel-node server/index.js",
+    "build": "babel server --out-dir dist",
+    "serve": "node dist/index.js",
+    "test": "jest --coverage --runInBand",
+    "lint": "./node_modules/.bin/eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JCanaks/RandomDial.git"
+  },
+  "author": "Jane C. Anaekwe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JCanaks/RandomDial/issues"
+  },
+  "homepage": "https://github.com/JCanaks/RandomDial#readme",
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "dotenv": "^8.0.0"
+  }
+}
