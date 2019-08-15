@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-app.use(routes);
+app.use('/api', routes);
 
 const port = process.env.PORT || 3000;
 
