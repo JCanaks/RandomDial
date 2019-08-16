@@ -15,7 +15,9 @@ app.use('/api', routes);
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-  res.send('Welcome to RandomDail, your Simple Random Phone Number Generator');
+  res.send({
+    message: 'Welcome to RandomDail, your Simple Random Phone Number Generator'
+  });
 });
 
 // eslint-disable-next-line no-console
