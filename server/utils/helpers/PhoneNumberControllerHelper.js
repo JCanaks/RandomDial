@@ -28,4 +28,25 @@ export const responseFormat = (message, data = {}) => ({
   data,
 });
 
-export const generatePhoneNumbers = () => { };
+export const generateRandomPhoneNumbers = (amount) => {
+  const phoneNumbers = [];
+  for (let i = 0; i < amount; i += 1) {
+    const randomPhoneNumber = `0${Math.floor(Math.random() * 900000000) + 100000000}`;
+    phoneNumbers.push(randomPhoneNumber);
+  }
+  const generatedDetails = {
+    total: phoneNumbers.length,
+    phoneNumbers,
+  };
+  return generatedDetails;
+};
+
+export const storeRandomPhoneNumbers = (phoneNumbers) => {
+  const filePath = '../../database/storage/phoneNumbers.txt';
+  const writeStream = fs.createWriteStream(path.join(__dirname, filePath),
+    { flags: 'a+' });
+  phoneNumbers.forEach((element) => {
+    writeStream.write(`${element}\n`);
+  });
+  writeStream.end();
+};
