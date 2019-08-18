@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import readline from 'readline';
 import path from 'path';
 import fs from 'fs';
@@ -49,4 +50,43 @@ export const storeRandomPhoneNumbers = (phoneNumbers) => {
     writeStream.write(`${element}\n`);
   });
   writeStream.end();
+};
+
+export const getMaxAndMinNumbers = (readLineInstance, phoneBook) => {
+  try {
+    readLineInstance.on('line', (number) => {
+      const phoneNumber = parseInt(number, 10);
+
+      // When there is no phone number in the file storage
+      // eslint-disable-next-line no-restricted-globals
+      if (isNaN(phoneNumber)) {
+        return;
+      }
+
+      if (phoneBook.total === 0) {
+        phoneBook.min = number;
+      }
+      phoneBook.min = phoneNumber < parseInt(phoneBook.min, 10) ? number : phoneBook.min;
+      phoneBook.max = phoneNumber > parseInt(phoneBook.max, 10) ? number : phoneBook.max;
+      phoneBook.total += 1;
+      phoneBook.phoneNumbers.push(number);
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const sortAscending = (phoneNumbers) => {
+  phoneNumbers.sort((a, b) => a - b);
+};
+
+export const sortDescending = (phoneNumbers) => {
+  phoneNumbers.sort((a, b) => b - a);
+};
+
+export const clearFile = () => {
+  const filePath = '../../database/storage/phoneNumbers.txt';
+  fs.writeFile(path.join(__dirname, filePath), '', { flag: 'w+' }, (err) => {
+    if (err) throw err;
+  });
 };
