@@ -12,11 +12,15 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use('/api', routes);
 
+app.use((err, req, res) => res.status(500).json({
+  message: 'Internal Server error',
+}));
+
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
   res.send({
-    message: 'Welcome to RandomDail, your Simple Random Phone Number Generator'
+    message: 'Welcome to RandomDail, your Simple Random Phone Number Generator',
   });
 });
 

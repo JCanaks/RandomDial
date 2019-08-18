@@ -4,12 +4,17 @@ import path from 'path';
 import fs from 'fs';
 
 export const generateReadlineInstance = () => {
-  const filePath = '../../database/storage/phoneNumbers.txt';
-  const readLineInstance = readline.createInterface({
-    input: fs.createReadStream(path.join(__dirname, filePath),
-      { flags: 'a+' }),
-  });
-  return readLineInstance;
+  try {
+    const filePath = '../../database/storage/phoneNumbers.txt';
+    const input = fs.createReadStream(path.join(__dirname, filePath),
+      { flags: 'a+' });
+    const readLineInstance = readline.createInterface({
+      input,
+    });
+    return readLineInstance;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getPhoneNumberList = (readLineInstance, phoneBook) => {
@@ -43,13 +48,17 @@ export const generateRandomPhoneNumbers = (amount) => {
 };
 
 export const storeRandomPhoneNumbers = (phoneNumbers) => {
-  const filePath = '../../database/storage/phoneNumbers.txt';
-  const writeStream = fs.createWriteStream(path.join(__dirname, filePath),
-    { flags: 'a+' });
-  phoneNumbers.forEach((element) => {
-    writeStream.write(`${element}\n`);
-  });
-  writeStream.end();
+  try {
+    const filePath = '../../database/storage/phoneNumbers.txt';
+    const writeStream = fs.createWriteStream(path.join(__dirname, filePath),
+      { flags: 'a+' });
+    phoneNumbers.forEach((element) => {
+      writeStream.write(`${element}\n`);
+    });
+    writeStream.end();
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getMaxAndMinNumbers = (readLineInstance, phoneBook) => {
@@ -85,8 +94,12 @@ export const sortDescending = (phoneNumbers) => {
 };
 
 export const clearFile = () => {
-  const filePath = '../../database/storage/phoneNumbers.txt';
-  fs.writeFile(path.join(__dirname, filePath), '', { flag: 'w+' }, (err) => {
-    if (err) throw err;
-  });
+  try {
+    const filePath = '../../database/storage/phoneNumbers.txt';
+    fs.writeFile(path.join(__dirname, filePath), '', { flag: 'w+' }, (err) => {
+      if (err) throw err;
+    });
+  } catch (error) {
+    throw error;
+  }
 };

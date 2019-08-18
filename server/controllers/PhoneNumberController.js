@@ -11,7 +11,7 @@ import {
 } from '../utils/helpers/PhoneNumberControllerHelper';
 
 class PhoneNumberController {
-  static async getPhoneNumbers(req, res) {
+  static async getPhoneNumbers(req, res, next) {
     try {
       const phoneBook = {
         total: 0,
@@ -26,11 +26,11 @@ class PhoneNumberController {
           : responseFormat('Phone Numbers Fetched Successfully', phoneBook),
       ));
     } catch (error) {
-      throw error;
+      return next(error);
     }
   }
 
-  static async generatePhoneNumbers(req, res) {
+  static async generatePhoneNumbers(req, res, next) {
     try {
       const { amount } = req.body;
 
@@ -40,18 +40,24 @@ class PhoneNumberController {
         );
       }
 
+      if (amount > 500) {
+        return res.status(400).json(
+          responseFormat('Cannot Generate more than 500 numbers at a time', []),
+        );
+      }
+
       const generatedDetails = await generateRandomPhoneNumbers(amount);
-      storeRandomPhoneNumbers(generatedDetails.phoneNumbers);
+      await storeRandomPhoneNumbers(generatedDetails.phoneNumbers);
 
       return res.status(201).json(
         responseFormat(`${generatedDetails.total} phone number(s) successfully generated`, generatedDetails),
       );
     } catch (error) {
-      throw error;
+      return next(error);
     }
   }
 
-  static async getSortedPhoneNumbers(req, res) {
+  static async getSortedPhoneNumbers(req, res, next) {
     try {
       const phoneBook = {
         total: 0,
@@ -63,7 +69,7 @@ class PhoneNumberController {
 
       await getMaxAndMinNumbers(readLineInstance, phoneBook);
 
-      readLineInstance.on('close', () => {
+      return readLineInstance.on('close', () => {
         if (phoneBook.phoneNumbers.length < 1) {
           return res.status(200).json(
             responseFormat('No phone numbers found. Pls generate new phone numbers', {
@@ -85,17 +91,19 @@ class PhoneNumberController {
         );
       });
     } catch (error) {
-      throw error;
+      return next(error);
     }
   }
 
-  static async clearFileStorage(req, res) {
-    await clearFile();
-    return res.status(200).json(
-      responseFormat('Phone Numbers Successfully deleted'),
-    );
+  static async clearFileStorage(req, res, next) {
+    try {
+      await clearFile();
+      return res.status(200).json(
+        responseFormat('Phone Numbers Successfully deleted'),
+      );
+    } catch (error) {
+      return next(error);
+    }
   }
 }
-
-
 export default PhoneNumberController;
