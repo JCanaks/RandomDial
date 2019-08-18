@@ -7,6 +7,7 @@ import {
   getMaxAndMinNumbers,
   sortAscending,
   sortDescending,
+  clearFile,
 } from '../utils/helpers/PhoneNumberControllerHelper';
 
 class PhoneNumberController {
@@ -21,7 +22,7 @@ class PhoneNumberController {
       await getPhoneNumberList(readLineInstance, phoneBook);
       readLineInstance.on('close', () => res.status(200).json(
         phoneBook.total < 1
-          ? responseFormat('There is currently no phone numbers on the List', phoneBook)
+          ? responseFormat('No phone numbers found. Pls generate new phone numbers', phoneBook)
           : responseFormat('Phone Numbers Fetched Successfully', phoneBook),
       ));
     } catch (error) {
@@ -65,7 +66,7 @@ class PhoneNumberController {
       readLineInstance.on('close', () => {
         if (phoneBook.phoneNumbers.length < 1) {
           return res.status(200).json(
-            responseFormat('There is currently no phone numbers on the List', {
+            responseFormat('No phone numbers found. Pls generate new phone numbers', {
               total: phoneBook.total,
               phoneNumbers: phoneBook.phoneNumbers,
             }),
@@ -87,6 +88,14 @@ class PhoneNumberController {
       throw error;
     }
   }
+
+  static async clearFileStorage(req, res) {
+    await clearFile();
+    return res.status(200).json(
+      responseFormat('Phone Numbers Successfully deleted'),
+    );
+  }
 }
+
 
 export default PhoneNumberController;

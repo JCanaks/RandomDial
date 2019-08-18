@@ -83,3 +83,10 @@ export const sortAscending = (phoneNumbers) => {
 export const sortDescending = (phoneNumbers) => {
   phoneNumbers.sort((a, b) => b - a);
 };
+
+export const clearFile = () => {
+  const filePath = '../../database/storage/phoneNumbers.txt';
+  fs.writeFile(path.join(__dirname, filePath), '', { flag: 'w+' }, (err) => {
+    if (err) throw err;
+  });
+};
