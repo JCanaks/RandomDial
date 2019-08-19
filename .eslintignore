@@ -1,2 +1,5 @@
 /node_modules/**
+server/database/**
+server/__tests__/**/*.spec.js
 .env
+jest.config.js

@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the PhoneNumber Controller Get /clear - clearing the list of phone numbers 1`] = `
+Object {
+  "data": Object {},
+  "message": "Phone Numbers Successfully deleted",
+}
+`;
+
+exports[`Testing the PhoneNumber Controller Get /phonenumber - Getting an empty list of phone numbers 1`] = `
+Object {
+  "data": Object {
+    "phoneNumbers": Array [],
+    "total": 0,
+  },
+  "message": "No phone numbers found. Pls generate new phone numbers",
+}
+`;
+
+exports[`Testing the PhoneNumber Controller Get /phonenumber - Getting the list of phone numbers 1`] = `
+Object {
+  "data": Object {
+    "phoneNumbers": Array [
+      "0333333333",
+      "0222222222",
+      "0111111111",
+      "0555555555",
+      "0444444444",
+    ],
+    "total": 5,
+  },
+  "message": "Phone Numbers Fetched Successfully",
+}
+`;
+
+exports[`Testing the PhoneNumber Controller Get /sort - sorting an empty list of phone numbers 1`] = `
+Object {
+  "data": Object {
+    "phoneNumbers": Array [],
+    "total": 0,
+  },
+  "message": "No phone numbers found. Pls generate new phone numbers",
+}
+`;
+
+exports[`Testing the PhoneNumber Controller Get /sort - sorting the list of phone numbers in ascending order and finding max/min numbers 1`] = `
+Object {
+  "data": Object {
+    "max": "0555555555",
+    "min": "0111111111",
+    "phoneNumbers": Array [
+      "0111111111",
+      "0222222222",
+      "0333333333",
+      "0444444444",
+      "0555555555",
+    ],
+    "total": 5,
+  },
+  "message": "Phone Numbers Fetched Successfully",
+}
+`;
+
+exports[`Testing the PhoneNumber Controller Get /sort - sorting the list of phone numbers in descending order and finding max/min numbers 1`] = `
+Object {
+  "data": Object {
+    "max": "0555555555",
+    "min": "0111111111",
+    "phoneNumbers": Array [
+      "0555555555",
+      "0444444444",
+      "0333333333",
+      "0222222222",
+      "0111111111",
+    ],
+    "total": 5,
+  },
+  "message": "Phone Numbers Fetched Successfully",
+}
+`;
+
+exports[`Testing the PhoneNumber Controller Get /sort - sorting the list of phone numbers without order and finding max/min numbers 1`] = `
+Object {
+  "data": Object {
+    "max": "0555555555",
+    "min": "0111111111",
+    "phoneNumbers": Array [
+      "0333333333",
+      "0222222222",
+      "0111111111",
+      "0555555555",
+      "0444444444",
+    ],
+    "total": 5,
+  },
+  "message": "Phone Numbers Fetched Successfully",
+}
+`;
+
+exports[`Testing the PhoneNumber Controller POST /phonenumbers - generating random phone numbers above 500 1`] = `
+Object {
+  "data": Array [],
+  "message": "Cannot Generate more than 500 numbers at a time",
+}
+`;
+
+exports[`Testing the PhoneNumber Controller POST /phonenumbers - generating random phone numbers with no amount specified 1`] = `
+Object {
+  "data": Array [],
+  "message": "No number(s) generated please specify an ammount greater than or equal to 1",
+}
+`;
