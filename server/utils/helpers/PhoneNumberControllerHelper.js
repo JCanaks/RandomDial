@@ -2,31 +2,23 @@
 import readline from 'readline';
 import path from 'path';
 import fs from 'fs';
+import filePath from '../../database/storage/config';
 
 export const generateReadlineInstance = () => {
-  try {
-    const filePath = '../../database/storage/phoneNumbers.txt';
-    const input = fs.createReadStream(path.join(__dirname, filePath),
-      { flags: 'a+' });
-    const readLineInstance = readline.createInterface({
-      input,
-    });
-    return readLineInstance;
-  } catch (error) {
-    throw error;
-  }
+  const input = fs.createReadStream(path.join(__dirname, filePath),
+    { flags: 'a+' });
+  const readLineInstance = readline.createInterface({
+    input,
+  });
+  return readLineInstance;
 };
 
 export const getPhoneNumberList = (readLineInstance, phoneBook) => {
-  try {
-    readLineInstance.on('line', (line) => {
-      // eslint-disable-next-line no-param-reassign
-      phoneBook.total += 1;
-      phoneBook.phoneNumbers.push(line);
-    });
-  } catch (error) {
-    throw error;
-  }
+  readLineInstance.on('line', (line) => {
+    // eslint-disable-next-line no-param-reassign
+    phoneBook.total += 1;
+    phoneBook.phoneNumbers.push(line);
+  });
 };
 
 export const responseFormat = (message, data = {}) => ({
@@ -48,41 +40,26 @@ export const generateRandomPhoneNumbers = (amount) => {
 };
 
 export const storeRandomPhoneNumbers = (phoneNumbers) => {
-  try {
-    const filePath = '../../database/storage/phoneNumbers.txt';
-    const writeStream = fs.createWriteStream(path.join(__dirname, filePath),
-      { flags: 'a+' });
-    phoneNumbers.forEach((element) => {
-      writeStream.write(`${element}\n`);
-    });
-    writeStream.end();
-  } catch (error) {
-    throw error;
-  }
+  const writeStream = fs.createWriteStream(path.join(__dirname, filePath),
+    { flags: 'a+' });
+  phoneNumbers.forEach((element) => {
+    writeStream.write(`${element}\n`);
+  });
+  writeStream.end();
 };
 
 export const getMaxAndMinNumbers = (readLineInstance, phoneBook) => {
-  try {
-    readLineInstance.on('line', (number) => {
-      const phoneNumber = parseInt(number, 10);
+  readLineInstance.on('line', (number) => {
+    const phoneNumber = parseInt(number, 10);
 
-      // When there is no phone number in the file storage
-      // eslint-disable-next-line no-restricted-globals
-      if (isNaN(phoneNumber)) {
-        return;
-      }
-
-      if (phoneBook.total === 0) {
-        phoneBook.min = number;
-      }
-      phoneBook.min = phoneNumber < parseInt(phoneBook.min, 10) ? number : phoneBook.min;
-      phoneBook.max = phoneNumber > parseInt(phoneBook.max, 10) ? number : phoneBook.max;
-      phoneBook.total += 1;
-      phoneBook.phoneNumbers.push(number);
-    });
-  } catch (error) {
-    throw error;
-  }
+    if (phoneBook.total === 0) {
+      phoneBook.min = number;
+    }
+    phoneBook.min = phoneNumber < parseInt(phoneBook.min, 10) ? number : phoneBook.min;
+    phoneBook.max = phoneNumber > parseInt(phoneBook.max, 10) ? number : phoneBook.max;
+    phoneBook.total += 1;
+    phoneBook.phoneNumbers.push(number);
+  });
 };
 
 export const sortAscending = (phoneNumbers) => {
@@ -94,12 +71,5 @@ export const sortDescending = (phoneNumbers) => {
 };
 
 export const clearFile = () => {
-  try {
-    const filePath = '../../database/storage/phoneNumbers.txt';
-    fs.writeFile(path.join(__dirname, filePath), '', { flag: 'w+' }, (err) => {
-      if (err) throw err;
-    });
-  } catch (error) {
-    throw error;
-  }
+  fs.writeFile(path.join(__dirname, filePath), '', { flag: 'w+' }, () => {});
 };
