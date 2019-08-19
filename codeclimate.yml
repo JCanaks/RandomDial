@@ -6,5 +6,5 @@ plugins:
       languages:
       - javascript
 exclude_patterns:
-  - server/test/**/*
+  - server/__test__/**/*
   - server/database/**/*
