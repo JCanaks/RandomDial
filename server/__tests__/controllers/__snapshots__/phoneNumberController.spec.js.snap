@@ -107,6 +107,6 @@ Object {
 exports[`Testing the PhoneNumber Controller POST /phonenumbers - generating random phone numbers with no amount specified 1`] = `
 Object {
   "data": Array [],
-  "message": "No number(s) generated please specify an ammount greater than or equal to 1",
+  "message": "No number(s) generated please specify an amount (integer) greater than or equal to 1",
 }
 `;

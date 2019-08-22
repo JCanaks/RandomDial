@@ -9,6 +9,7 @@ import {
   sortDescending,
   clearFile,
 } from '../utils/helpers/PhoneNumberControllerHelper';
+import { isString } from 'util';
 
 class PhoneNumberController {
   static async getPhoneNumbers(req, res) {
@@ -29,9 +30,9 @@ class PhoneNumberController {
   static async generatePhoneNumbers(req, res) {
     const { amount } = req.body;
 
-    if (!amount || amount < 1) {
+    if (!amount || amount < 1 || typeof amount === 'string') {
       return res.status(400).json(
-        responseFormat('No number(s) generated please specify an ammount greater than or equal to 1', []),
+        responseFormat('No number(s) generated please specify an amount (integer) greater than or equal to 1', []),
       );
     }
 
