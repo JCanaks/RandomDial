@@ -156,7 +156,7 @@ Descending order
 
 
 ### API Docs
-Click [here]() to view the API documentation generated for this application with Postman.
+Click [here](https://documenter.getpostman.com/view/5131256/SVfKyWPA?version=latest) to view the API documentation generated for this application with [Postman](https://www.getpostman.com/).
 
 ### Author
 - Jane C. Anaekwe - [@JCanaks](https://github.com/JCanaks)
