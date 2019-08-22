@@ -9,7 +9,6 @@ import {
   sortDescending,
   clearFile,
 } from '../utils/helpers/PhoneNumberControllerHelper';
-import { isString } from 'util';
 
 class PhoneNumberController {
   static async getPhoneNumbers(req, res) {
