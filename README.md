@@ -57,6 +57,14 @@ npm test
 ```
 ### API Features/Endpoints
 The following are the API features and endpoints for the application which can be tested via [Postman](https://www.getpostman.com/) or any other API testing tool. 
+
+#### BASE_URL 
+All API endpoints can be accessed using baseURL
+
+- https://randomdial.herokuapp.com/api (remote)
+
+- http://localhost:3000/api (local)
+
 #### Generate Random 10-digits phone numbers
 `POST /phonenumbers` - Generates a single or multiple phone numbers (The amount to be generated should be specified in the request body).
 
